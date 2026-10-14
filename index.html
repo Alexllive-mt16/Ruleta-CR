@@ -1,4 +1,4 @@
-<!doctype html>
+y<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -69,9 +69,37 @@ let playerName = "";
 function makeId(){return Math.random().toString(36).slice(2,8).toUpperCase()}
 function showStatus(el,msg){$(el).textContent=msg}
 function initFirebase(){
- try {
-  if(!firebase.apps.length){
-   firebase.initializeApp(firebaseConfig);
+try {
+alert("1. Iniciando Firebase");
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+alert("2. Firebase se inició");
+db = firebase.firestore();
+alert("3. Firestore está listo");
+return true;
+} catch(e) {
+alert("ERROR: " + e.message);
+showStatus("hostStatus", "Error al conectar Firebase: " + e.message);
+return false;
+}
+}
+}
+
+alert("2. Firebase se inició");
+
+db = firebase.firestore();
+
+alert("3. Firestore está listo");
+
+return true;
+
+} catch(e) {
+alert("ERROR: " + e.message);
+showStatus("hostStatus", "Error al conectar Firebase: " + e.message);
+return false;
+}
+}
   }
   db = firebase.firestore();
   return true;
