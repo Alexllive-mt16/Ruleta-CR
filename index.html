@@ -1,90 +1,182 @@
-<!doctype html>
 
+<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ruleta de enfrentamientos</title>
+
 <style>
-:root{--bg:#101323;--panel:#1a2038;--line:#303958;--text:#f4f6ff;--muted:#aeb8d5;--accent:#8b5cf6;--accent2:#22d3ee}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#25204b 0,#101323 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-main{max-width:1050px;margin:auto;padding:22px 16px 50px}
-.brand{text-align:center;margin:10px 0 24px}
-.brand h1{font-size:clamp(28px,5vw,46px);margin:0}
-.brand p{color:var(--muted);margin:8px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
-.panel{background:#1a2038ef;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 35px #0003}
-h2{font-size:20px;margin:0 0 14px}
-label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}
-input{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:#0f1428;color:var(--text);font-size:16px;outline:none}
-button{border:0;border-radius:12px;padding:12px 15px;font-size:15px;font-weight:750;cursor:pointer;color:white;background:linear-gradient(100deg,var(--accent),#6d5dfc);margin:8px 6px 0 0}
-button.secondary{background:#303958}
-button.cyan{background:linear-gradient(100deg,#0891b2,#22d3ee);color:#071525}
-button:disabled{opacity:.4;cursor:not-allowed}
-.muted{color:var(--muted);font-size:14px;line-height:1.5}
-.status{padding:10px 12px;border-radius:10px;background:#10162a;color:var(--muted);margin:10px 0;overflow-wrap:anywhere}
-.hidden{display:none!important}
-.pill{display:inline-block;border:1px solid var(--line);padding:4px 9px;border-radius:999px;color:var(--muted);font-size:12px}
-.participant{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin:7px 0;background:#11172c}
-.participant small{color:var(--muted)}
-#qr{display:flex;justify-content:center;background:white;border-radius:12px;padding:12px;min-height:40px;margin:12px auto;max-width:260px}
-#qr img,#qr canvas{max-width:100%;height:auto!important}
-.arena{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:18px 0}
-.fighter{background:linear-gradient(140deg,#30245d,#17253e);border:1px solid #6551a4;border-radius:16px;padding:18px 8px;text-align:center;min-height:88px;display:grid;place-items:center;font-size:clamp(16px,3vw,24px);font-weight:850;overflow-wrap:anywhere}
-.vs{font-weight:900;color:var(--accent2)}
-.note{border-left:3px solid var(--accent2);padding:9px 12px;background:#101a2a;border-radius:0 9px 9px 0;color:var(--muted);font-size:13px}
-.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
+:root {
+  --bg:#101323;
+  --panel:#1a2038;
+  --line:#303958;
+  --text:#f4f6ff;
+  --muted:#aeb8d5;
+  --accent:#8b5cf6;
+  --accent2:#22d3ee;
+}
+* { box-sizing:border-box }
+body {
+  margin:0;
+  background:radial-gradient(circle at top,#25204b 0,#101323 48%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  min-height:100vh;
+}
+main { max-width:1050px;margin:auto;padding:22px 16px 50px }
+.brand { text-align:center;margin:10px 0 24px }
+.brand h1 { font-size:clamp(28px,5vw,46px);margin:0 }
+.brand p { color:var(--muted);margin:8px 0 }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+  gap:16px;
+}
+.panel {
+  background:#1a2038ef;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 12px 35px #0003;
+}
+h2 { font-size:20px;margin:0 0 14px }
+label { display:block;color:var(--muted);font-size:14px;margin:12px 0 6px }
+input {
+  width:100%;padding:12px 13px;border-radius:11px;
+  border:1px solid var(--line);background:#0f1428;
+  color:var(--text);font-size:16px;outline:none;
+}
+button {
+  border:0;border-radius:12px;padding:12px 15px;
+  font-size:15px;font-weight:750;cursor:pointer;
+  color:white;background:linear-gradient(100deg,var(--accent),#6d5dfc);
+  margin:8px 6px 0 0;
+}
+button.secondary { background:#303958 }
+button.cyan { background:linear-gradient(100deg,#0891b2,#22d3ee);color:#071525 }
+button:disabled { opacity:.4;cursor:not-allowed }
+.muted { color:var(--muted);font-size:14px;line-height:1.5 }
+.status {
+  padding:10px 12px;border-radius:10px;background:#10162a;
+  color:var(--muted);margin:10px 0;overflow-wrap:anywhere;
+}
+.hidden { display:none!important }
+.pill {
+  display:inline-block;border:1px solid var(--line);padding:4px 9px;
+  border-radius:999px;color:var(--muted);font-size:12px;
+}
+.participant {
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:10px 12px;border:1px solid var(--line);
+  border-radius:12px;margin:7px 0;background:#11172c;
+}
+.participant small { color:var(--muted) }
+#qr {
+  display:flex;justify-content:center;background:white;border-radius:12px;
+  padding:12px;min-height:40px;margin:12px auto;max-width:260px;
+}
+#qr img,#qr canvas { max-width:100%;height:auto!important }
+.arena {
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:10px;align-items:center;margin:18px 0;
+}
+.fighter {
+  background:linear-gradient(140deg,#30245d,#17253e);
+  border:1px solid #6551a4;border-radius:16px;padding:18px 8px;
+  text-align:center;min-height:88px;display:grid;place-items:center;
+  font-size:clamp(16px,3vw,24px);font-weight:850;overflow-wrap:anywhere;
+}
+.vs { font-weight:900;color:var(--accent2) }
+.note {
+  border-left:3px solid var(--accent2);padding:9px 12px;
+  background:#101a2a;border-radius:0 9px 9px 0;
+  color:var(--muted);font-size:13px;
+}
+.footer { text-align:center;color:var(--muted);font-size:12px;margin-top:22px }
 </style>
 </head>
+
 <body>
 <main>
 <header class="brand">
-<h1>🎯 Ruleta de enfrentamientos</h1>
-<p>Escanea el QR, únete con tu nombre y espera el sorteo.</p>
-<span class="pill" id="roomPill">Sin sala activa</span>
-</header><div class="grid">
+  <h1>🎯 Ruleta de enfrentamientos</h1>
+  <p>Escanea el QR, únete con tu nombre y espera el sorteo.</p>
+  <span class="pill" id="roomPill">Sin sala activa</span>
+</header>
+
+<div class="grid">
 <section class="panel" id="hostPanel">
-<h2>🛠️ Panel del organizador</h2>
-<p class="muted">Crea una sala y comparte su QR. Los participantes aparecerán aquí en tiempo real.</p>
-<label for="hostName">Tu nombre (organizador)</label>
-<input id="hostName" maxlength="28" placeholder="Ej. Alex">
-<button id="createRoom">Crear sala nueva</button><div id="hostControls" class="hidden">
-<div class="status" id="hostStatus">Preparando sala...</div>
-<div><b>QR para unirse</b><div id="qr"></div></div>
-<label for="joinUrl">Enlace para compartir</label>
-<input id="joinUrl" readonly>
-<button class="secondary" id="copyLink">Copiar enlace</button>
-<h2 style="margin-top:22px">Participantes <span class="pill" id="count">0</span></h2>
-<div id="participants"><p class="muted">Todavía no hay participantes.</p></div>
-<button class="cyan" id="spin" disabled>🎲 Elegir 2 al azar</button>
-<button class="secondary" id="resetMatch" disabled>Limpiar enfrentamiento</button>
-<div id="matchBox" class="hidden">
-<div class="arena"><div class="fighter" id="fighter1">Jugador 1</div><div class="vs">VS</div><div class="fighter" id="fighter2">Jugador 2</div></div>
-<p class="muted" id="matchInfo"></p>
-</div>
-</div>
-</section><section class="panel" id="joinPanel">
-<h2>🙋 Unirme a la sala</h2>
-<div id="joinRoomStatus" class="status">Abre el enlace del QR para entrar a una sala.</div>
-<div id="joinForm" class="hidden">
-<label for="playerName">Tu nombre o apodo</label>
-<input id="playerName" maxlength="28" placeholder="Escribe cómo te llamas">
-<button id="joinBtn" class="cyan">Unirme</button>
-</div>
-<div id="joinedBox" class="hidden">
-<p>✅ Ya estás en la sala como <b id="joinedName"></b>.</p>
-<p class="muted">Deja esta página abierta. Verás el enfrentamiento cuando el organizador haga el sorteo.</p>
-<div id="playerMatch" class="hidden">
-<div class="arena"><div class="fighter" id="playerF1"></div><div class="vs">VS</div><div class="fighter" id="playerF2"></div></div>
-<p class="muted">¡Suerte a los dos!</p>
-</div>
-</div>
-<div class="note">Usa nombres y apodos apropiados. Acuerden reglas seguras antes de cualquier reto físico.</div>
+  <h2>🛠️ Panel del organizador</h2>
+  <p class="muted">Crea una sala y comparte su QR. Los participantes aparecerán aquí en tiempo real.</p>
+
+  <label for="hostName">Tu nombre (organizador)</label>
+  <input id="hostName" maxlength="28" placeholder="Ej. Alex">
+  <button id="createRoom">Crear sala nueva</button>
+
+  <div id="hostControls" class="hidden">
+    <div class="status" id="hostStatus">Preparando sala...</div>
+    <div><b>QR para unirse</b><div id="qr"></div></div>
+
+    <label for="joinUrl">Enlace para compartir</label>
+    <input id="joinUrl" readonly>
+    <button class="secondary" id="copyLink">Copiar enlace</button>
+
+    <h2 style="margin-top:22px">Participantes <span class="pill" id="count">0</span></h2>
+    <div id="participants"><p class="muted">Todavía no hay participantes.</p></div>
+
+    <button class="cyan" id="spin" disabled>🎲 Elegir 2 al azar</button>
+    <button class="secondary" id="resetMatch" disabled>Limpiar enfrentamiento</button>
+
+    <div id="matchBox" class="hidden">
+      <div class="arena">
+        <div class="fighter" id="fighter1">Jugador 1</div>
+        <div class="vs">VS</div>
+        <div class="fighter" id="fighter2">Jugador 2</div>
+      </div>
+      <p class="muted" id="matchInfo"></p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="joinPanel">
+  <h2>🙋 Unirme a la sala</h2>
+  <div id="joinRoomStatus" class="status">Abre el enlace del QR para entrar a una sala.</div>
+
+  <div id="joinForm" class="hidden">
+    <label for="playerName">Tu nombre o apodo</label>
+    <input id="playerName" maxlength="28" placeholder="Escribe cómo te llamas">
+    <button id="joinBtn" class="cyan">Unirme</button>
+  </div>
+
+  <div id="joinedBox" class="hidden">
+    <p>✅ Ya estás en la sala como <b id="joinedName"></b>.</p>
+    <p class="muted">Deja esta página abierta. Verás el enfrentamiento cuando el organizador haga el sorteo.</p>
+
+    <div id="playerMatch" class="hidden">
+      <div class="arena">
+        <div class="fighter" id="playerF1"></div>
+        <div class="vs">VS</div>
+        <div class="fighter" id="playerF2"></div>
+      </div>
+      <p class="muted">¡Suerte a los dos!</p>
+    </div>
+  </div>
+
+  <div class="note">Acuerden reglas seguras antes de cualquier reto físico.</div>
 </section>
 </div>
-<div class="footer">Ruleta QR · La sala se sincroniza en tiempo real mediante Firebase.</div>
-</main><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>
+
+<div class="footer">Ruleta QR · Las salas se sincronizan mediante Firebase.</div>
+</main>
+
+<!-- Firebase: aplicación, autenticación anónima y Firestore -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
 const firebaseConfig = {
   apiKey: "AIzaSyBcz288s9i5ch7YdiXiJvSv6-8p6SZdG_I",
   authDomain: "ruleta-cr.firebaseapp.com",
@@ -113,22 +205,8 @@ function showStatus(el, msg) {
   $(el).textContent = msg;
 }
 
-function initFirebase(statusEl = "hostStatus") {
-  try {
-    if (typeof firebase === "undefined") {
-      throw new Error("No cargó Firebase. Revisa tu conexión a internet.");
-    }
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-
-    db = firebase.firestore();
-    return true;
-  } catch (e) {
-    showStatus(statusEl, "Error al iniciar Firebase: " + e.message);
-    return false;
-  }
+function errorMessage(e) {
+  return (e.code ? e.code + ": " : "") + e.message;
 }
 
 function safe(s) {
@@ -141,17 +219,40 @@ function safe(s) {
   }[c]));
 }
 
+/* Inicializar Firebase e iniciar sesión anónima */
+async function initFirebase(statusEl = "hostStatus") {
+  try {
+    if (typeof firebase === "undefined") {
+      throw new Error("No cargó Firebase. Revisa tu conexión a internet.");
+    }
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    if (!firebase.auth().currentUser) {
+      showStatus(statusEl, "Iniciando sesión anónima...");
+      await firebase.auth().signInAnonymously();
+    }
+
+    db = firebase.firestore();
+    return true;
+  } catch (e) {
+    showStatus(statusEl, "Error de Firebase: " + errorMessage(e));
+    return false;
+  }
+}
+
+/* Crear una sala nueva */
 async function createRoom() {
   $("createRoom").disabled = true;
   $("hostControls").classList.remove("hidden");
   showStatus("hostStatus", "Conectando con Firebase...");
 
-  if (!initFirebase("hostStatus")) {
-    $("createRoom").disabled = false;
-    return;
-  }
-
   try {
+    const ready = await initFirebase("hostStatus");
+    if (!ready) return;
+
     roomId = makeId();
     isHost = true;
 
@@ -170,8 +271,8 @@ async function createRoom() {
     const url = new URL(location.href);
     url.searchParams.set("room", roomId);
     url.searchParams.delete("host");
-    $("joinUrl").value = url.href;
 
+    $("joinUrl").value = url.href;
     $("qr").innerHTML = "";
 
     if (typeof QRCode !== "undefined") {
@@ -190,12 +291,13 @@ async function createRoom() {
     showStatus("hostStatus", "Sala " + roomId + " creada. Comparte el QR o el enlace.");
     listenRoom();
   } catch (e) {
-    showStatus("hostStatus", "No se pudo crear la sala: " + e.message);
+    showStatus("hostStatus", "No se pudo crear la sala: " + errorMessage(e));
   } finally {
     $("createRoom").disabled = false;
   }
 }
 
+/* Escuchar cambios de una sala en tiempo real */
 function listenRoom() {
   if (!db || !roomId) return;
 
@@ -203,7 +305,10 @@ function listenRoom() {
 
   roomUnsub = db.collection("rooms").doc(roomId).onSnapshot(doc => {
     if (!doc.exists) {
-      showStatus(isHost ? "hostStatus" : "joinRoomStatus", "La sala ya no existe.");
+      showStatus(
+        isHost ? "hostStatus" : "joinRoomStatus",
+        "La sala ya no existe."
+      );
       return;
     }
 
@@ -228,8 +333,10 @@ function listenRoom() {
       renderPlayerMatch(data.match);
     }
   }, e => {
-    showStatus(isHost ? "hostStatus" : "joinRoomStatus",
-      "Error de conexión: " + e.message);
+    showStatus(
+      isHost ? "hostStatus" : "joinRoomStatus",
+      "Error de conexión: " + errorMessage(e)
+    );
   });
 }
 
@@ -258,24 +365,26 @@ function renderPlayerMatch(match) {
   $("playerF2").textContent = match.b.name;
 }
 
+/* Unirse a una sala */
 async function joinRoom() {
   if (!roomId) {
     showStatus("joinRoomStatus", "Abre el enlace de una sala para poder entrar.");
     return;
   }
 
-  if (!initFirebase("joinRoomStatus")) return;
-
-  const name = $("playerName").value.trim().slice(0, 28);
-
-  if (!name) {
-    showStatus("joinRoomStatus", "Escribe un nombre o apodo primero.");
-    return;
-  }
-
   $("joinBtn").disabled = true;
 
   try {
+    const ready = await initFirebase("joinRoomStatus");
+    if (!ready) return;
+
+    const name = $("playerName").value.trim().slice(0, 28);
+
+    if (!name) {
+      showStatus("joinRoomStatus", "Escribe un nombre o apodo primero.");
+      return;
+    }
+
     const ref = db.collection("rooms").doc(roomId);
     const snap = await ref.get();
 
@@ -308,12 +417,13 @@ async function joinRoom() {
     showStatus("joinRoomStatus", "Conectado a la sala " + roomId + ".");
     listenRoom();
   } catch (e) {
-    showStatus("joinRoomStatus", "No se pudo entrar: " + e.message);
+    showStatus("joinRoomStatus", "No se pudo entrar: " + errorMessage(e));
   } finally {
     $("joinBtn").disabled = false;
   }
 }
 
+/* Elegir dos participantes al azar */
 async function spin() {
   if (!db || !roomId) return;
 
@@ -346,16 +456,26 @@ async function spin() {
         }
       });
     });
+
+    showStatus("hostStatus", "¡Enfrentamiento sorteado!");
   } catch (e) {
-    showStatus("hostStatus", "No se pudo sortear: " + e.message);
+    showStatus("hostStatus", "No se pudo sortear: " + errorMessage(e));
+  } finally {
+    $("spin").disabled = false;
   }
 }
 
+/* Limpiar el enfrentamiento */
 async function resetMatch() {
+  if (!db || !roomId) return;
+
+  $("resetMatch").disabled = true;
+
   try {
     await db.collection("rooms").doc(roomId).update({ match: null });
+    showStatus("hostStatus", "Enfrentamiento limpiado.");
   } catch (e) {
-    showStatus("hostStatus", "No se pudo limpiar el enfrentamiento: " + e.message);
+    showStatus("hostStatus", "No se pudo limpiar: " + errorMessage(e));
   }
 }
 
@@ -375,16 +495,22 @@ $("copyLink").addEventListener("click", async () => {
   }
 });
 
+/* Si se abre mediante un enlace o QR de una sala */
 if (params.get("room")) {
   roomId = params.get("room");
   $("hostPanel").classList.add("hidden");
   $("roomPill").textContent = "Sala " + roomId;
   $("joinForm").classList.remove("hidden");
 
-  if (initFirebase("joinRoomStatus")) {
-    listenRoom();
-    showStatus("joinRoomStatus", "Conectando a la sala " + roomId + "...");
-  }
+  (async () => {
+    showStatus("joinRoomStatus", "Conectando con Firebase...");
+
+    if (await initFirebase("joinRoomStatus")) {
+      listenRoom();
+      showStatus("joinRoomStatus", "Conectando a la sala " + roomId + "...");
+    }
+  })();
 }
-</script></body>
+</script>
+</body>
 </html>
