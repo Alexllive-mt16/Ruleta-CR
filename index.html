@@ -60,12 +60,25 @@ const firebaseConfig = {
 };
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
+  let db = null;
+let roomId = null;
+let roomUnsub = null;
+let isHost = false;
+let playerId = null;
+let playerName = "";
 function makeId(){return Math.random().toString(36).slice(2,8).toUpperCase()}
 function showStatus(el,msg){$(el).textContent=msg}
 function initFirebase(){
- if(!configured){showStatus("hostStatus","Falta configurar Firebase. Sigue los pasos del archivo LEEME.");return false}
- if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
- db=firebase.firestore(); return true;
+ try {
+  if(!firebase.apps.length){
+   firebase.initializeApp(firebaseConfig);
+  }
+  db = firebase.firestore();
+  return true;
+ } catch(e) {
+  showStatus("hostStatus","Error al conectar Firebase: "+e.message);
+  return false;
+ }
 }
 function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function createRoom(){
