@@ -1,28 +1,59 @@
-y<!doctype html>
+<!doctype html>
+
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ruleta de enfrentamientos</title>
 <style>
-:root{--bg:#101323;--panel:#1a2038;--line:#303958;--text:#f4f6ff;--muted:#aeb8d5;--accent:#8b5cf6;--accent2:#22d3ee;--danger:#fb7185}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#25204b 0,#101323 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-main{max-width:1050px;margin:auto;padding:22px 16px 50px}.brand{text-align:center;margin:10px 0 24px}.brand h1{font-size:clamp(28px,5vw,46px);margin:0}.brand p{color:var(--muted);margin:8px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}.panel{background:#1a2038eF;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 35px #0003}
-h2{font-size:20px;margin:0 0 14px}label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}input{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:#0f1428;color:var(--text);font-size:16px;outline:none}button{border:0;border-radius:12px;padding:12px 15px;font-size:15px;font-weight:750;cursor:pointer;color:white;background:linear-gradient(100deg,var(--accent),#6d5dfc);margin:8px 6px 0 0}button.secondary{background:#303958}button.cyan{background:linear-gradient(100deg,#0891b2,#22d3ee);color:#071525}button.danger{background:#9f2946}button:disabled{opacity:.4;cursor:not-allowed}.muted{color:var(--muted);font-size:14px;line-height:1.5}.status{padding:10px 12px;border-radius:10px;background:#10162a;color:var(--muted);margin:10px 0}.hidden{display:none!important}.pill{display:inline-block;border:1px solid var(--line);padding:4px 9px;border-radius:999px;color:var(--muted);font-size:12px}.participant{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin:7px 0;background:#11172c}.participant small{color:var(--muted)}#qr{display:flex;justify-content:center;background:white;border-radius:12px;padding:12px;min-height:40px;margin:12px auto;max-width:260px}#qr img,#qr canvas{max-width:100%;height:auto!important}.arena{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:18px 0}.fighter{background:linear-gradient(140deg,#30245d,#17253e);border:1px solid #6551a4;border-radius:16px;padding:18px 8px;text-align:center;min-height:88px;display:grid;place-items:center;font-size:clamp(16px,3vw,24px);font-weight:850;overflow-wrap:anywhere}.vs{font-weight:900;color:var(--accent2)}.note{border-left:3px solid var(--accent2);padding:9px 12px;background:#101a2a;border-radius:0 9px 9px 0;color:var(--muted);font-size:13px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
+:root{--bg:#101323;--panel:#1a2038;--line:#303958;--text:#f4f6ff;--muted:#aeb8d5;--accent:#8b5cf6;--accent2:#22d3ee}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#25204b 0,#101323 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+main{max-width:1050px;margin:auto;padding:22px 16px 50px}
+.brand{text-align:center;margin:10px 0 24px}
+.brand h1{font-size:clamp(28px,5vw,46px);margin:0}
+.brand p{color:var(--muted);margin:8px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.panel{background:#1a2038ef;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 35px #0003}
+h2{font-size:20px;margin:0 0 14px}
+label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}
+input{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:#0f1428;color:var(--text);font-size:16px;outline:none}
+button{border:0;border-radius:12px;padding:12px 15px;font-size:15px;font-weight:750;cursor:pointer;color:white;background:linear-gradient(100deg,var(--accent),#6d5dfc);margin:8px 6px 0 0}
+button.secondary{background:#303958}
+button.cyan{background:linear-gradient(100deg,#0891b2,#22d3ee);color:#071525}
+button:disabled{opacity:.4;cursor:not-allowed}
+.muted{color:var(--muted);font-size:14px;line-height:1.5}
+.status{padding:10px 12px;border-radius:10px;background:#10162a;color:var(--muted);margin:10px 0;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.pill{display:inline-block;border:1px solid var(--line);padding:4px 9px;border-radius:999px;color:var(--muted);font-size:12px}
+.participant{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin:7px 0;background:#11172c}
+.participant small{color:var(--muted)}
+#qr{display:flex;justify-content:center;background:white;border-radius:12px;padding:12px;min-height:40px;margin:12px auto;max-width:260px}
+#qr img,#qr canvas{max-width:100%;height:auto!important}
+.arena{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:18px 0}
+.fighter{background:linear-gradient(140deg,#30245d,#17253e);border:1px solid #6551a4;border-radius:16px;padding:18px 8px;text-align:center;min-height:88px;display:grid;place-items:center;font-size:clamp(16px,3vw,24px);font-weight:850;overflow-wrap:anywhere}
+.vs{font-weight:900;color:var(--accent2)}
+.note{border-left:3px solid var(--accent2);padding:9px 12px;background:#101a2a;border-radius:0 9px 9px 0;color:var(--muted);font-size:13px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
 </style>
 </head>
-<body><main>
-<header class="brand"><h1>🎯 Ruleta de enfrentamientos</h1><p>Escanea el QR, únete con tu nombre y espera el sorteo.</p><span class="pill" id="roomPill">Sin sala activa</span></header>
-<div class="grid">
+<body>
+<main>
+<header class="brand">
+<h1>🎯 Ruleta de enfrentamientos</h1>
+<p>Escanea el QR, únete con tu nombre y espera el sorteo.</p>
+<span class="pill" id="roomPill">Sin sala activa</span>
+</header><div class="grid">
 <section class="panel" id="hostPanel">
 <h2>🛠️ Panel del organizador</h2>
 <p class="muted">Crea una sala y comparte su QR. Los participantes aparecerán aquí en tiempo real.</p>
-<label for="hostName">Tu nombre (organizador)</label><input id="hostName" maxlength="28" placeholder="Ej. Alex">
-<button id="createRoom">Crear sala nueva</button>
-<div id="hostControls" class="hidden">
-<div class="status" id="hostStatus">Sala creada.</div>
+<label for="hostName">Tu nombre (organizador)</label>
+<input id="hostName" maxlength="28" placeholder="Ej. Alex">
+<button id="createRoom">Crear sala nueva</button><div id="hostControls" class="hidden">
+<div class="status" id="hostStatus">Preparando sala...</div>
 <div><b>QR para unirse</b><div id="qr"></div></div>
-<label for="joinUrl">Enlace para compartir</label><input id="joinUrl" readonly>
+<label for="joinUrl">Enlace para compartir</label>
+<input id="joinUrl" readonly>
 <button class="secondary" id="copyLink">Copiar enlace</button>
 <h2 style="margin-top:22px">Participantes <span class="pill" id="count">0</span></h2>
 <div id="participants"><p class="muted">Todavía no hay participantes.</p></div>
@@ -33,22 +64,27 @@ h2{font-size:20px;margin:0 0 14px}label{display:block;color:var(--muted);font-si
 <p class="muted" id="matchInfo"></p>
 </div>
 </div>
-</section>
-<section class="panel" id="joinPanel">
+</section><section class="panel" id="joinPanel">
 <h2>🙋 Unirme a la sala</h2>
 <div id="joinRoomStatus" class="status">Abre el enlace del QR para entrar a una sala.</div>
-<div id="joinForm" class="hidden"><label for="playerName">Tu nombre o apodo</label><input id="playerName" maxlength="28" placeholder="Escribe cómo te llamas"><button id="joinBtn" class="cyan">Unirme</button></div>
-<div id="joinedBox" class="hidden"><p>✅ Ya estás en la sala como <b id="joinedName"></b>.</p><p class="muted">Deja esta página abierta. Verás el enfrentamiento cuando el organizador haga el sorteo.</p><div id="playerMatch" class="hidden"><div class="arena"><div class="fighter" id="playerF1"></div><div class="vs">VS</div><div class="fighter" id="playerF2"></div></div><p class="muted">¡Suerte a los dos!</p></div></div>
-<div class="note">Usa nombres/apodos apropiados. La ruleta solo elige participantes al azar; acuerden reglas seguras antes de cualquier reto físico.</div>
+<div id="joinForm" class="hidden">
+<label for="playerName">Tu nombre o apodo</label>
+<input id="playerName" maxlength="28" placeholder="Escribe cómo te llamas">
+<button id="joinBtn" class="cyan">Unirme</button>
+</div>
+<div id="joinedBox" class="hidden">
+<p>✅ Ya estás en la sala como <b id="joinedName"></b>.</p>
+<p class="muted">Deja esta página abierta. Verás el enfrentamiento cuando el organizador haga el sorteo.</p>
+<div id="playerMatch" class="hidden">
+<div class="arena"><div class="fighter" id="playerF1"></div><div class="vs">VS</div><div class="fighter" id="playerF2"></div></div>
+<p class="muted">¡Suerte a los dos!</p>
+</div>
+</div>
+<div class="note">Usa nombres y apodos apropiados. Acuerden reglas seguras antes de cualquier reto físico.</div>
 </section>
 </div>
 <div class="footer">Ruleta QR · La sala se sincroniza en tiempo real mediante Firebase.</div>
-</main>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+</main><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>
 const firebaseConfig = {
   apiKey: "AIzaSyBcz288s9i5ch7YdiXiJvSv6-8p6SZdG_I",
   authDomain: "ruleta-cr.firebaseapp.com",
@@ -58,128 +94,297 @@ const firebaseConfig = {
   appId: "1:1007659474020:web:d61534b2279fc377d75371",
   measurementId: "G-NW4S9SDRLE"
 };
-const $=id=>document.getElementById(id);
-const params=new URLSearchParams(location.search);
-  let db = null;
+
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+
+let db = null;
 let roomId = null;
 let roomUnsub = null;
 let isHost = false;
 let playerId = null;
 let playerName = "";
-function makeId(){return Math.random().toString(36).slice(2,8).toUpperCase()}
-function showStatus(el,msg){$(el).textContent=msg}
-function initFirebase(){
-try {
-alert("1. Iniciando Firebase");
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-alert("2. Firebase se inició");
-db = firebase.firestore();
-alert("3. Firestore está listo");
-return true;
-} catch(e) {
-alert("ERROR: " + e.message);
-showStatus("hostStatus", "Error al conectar Firebase: " + e.message);
-return false;
-}
-}
+
+function makeId() {
+  return Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
-alert("2. Firebase se inició");
-
-db = firebase.firestore();
-
-alert("3. Firestore está listo");
-
-return true;
-
-} catch(e) {
-alert("ERROR: " + e.message);
-showStatus("hostStatus", "Error al conectar Firebase: " + e.message);
-return false;
+function showStatus(el, msg) {
+  $(el).textContent = msg;
 }
-}
+
+function initFirebase(statusEl = "hostStatus") {
+  try {
+    if (typeof firebase === "undefined") {
+      throw new Error("No cargó Firebase. Revisa tu conexión a internet.");
+    }
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    db = firebase.firestore();
+    return true;
+  } catch (e) {
+    showStatus(statusEl, "Error al iniciar Firebase: " + e.message);
+    return false;
   }
-  db = firebase.firestore();
-  return true;
- } catch(e) {
-  showStatus("hostStatus","Error al conectar Firebase: "+e.message);
-  return false;
- }
 }
-function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-async function createRoom(){
-  alert("El botón sí funciona");
-  alert("Voy a conectar con Firebase");
- if(!initFirebase()){$("hostControls").classList.remove("hidden");return}
- try{
-  roomId=makeId(); isHost=true;
-  const host=($("hostName").value.trim()||"Organizador").slice(0,28);
-  await db.collection("rooms").doc(roomId).set({createdAt:firebase.firestore.FieldValue.serverTimestamp(),host,participants:[],match:null,active:true});
-  $("hostControls").classList.remove("hidden");$("roomPill").textContent="Sala "+roomId;
-  const url=new URL(location.href);url.searchParams.set("room",roomId);url.searchParams.delete("host");
-  $("joinUrl").value=url.href;
-  $("qr").innerHTML="";new QRCode($("qr"),{text:url.href,width:220,height:220,colorDark:"#111827",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
-  showStatus("hostStatus","Sala "+roomId+" activa. Comparte el QR o el enlace.");
-  $("spin").disabled=false; listenRoom();
- }catch(e){showStatus("hostStatus","No se pudo crear la sala: "+e.message)}
+
+function safe(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
 }
-function listenRoom(){
- if(roomUnsub)roomUnsub();
- roomUnsub=db.collection("rooms").doc(roomId).onSnapshot(doc=>{
-  if(!doc.exists){showStatus("hostStatus","La sala ya no existe.");return}
-  const data=doc.data(), people=data.participants||[];
-  $("count").textContent=people.length;
-  $("participants").innerHTML=people.length?people.map((p,i)=>`<div class="participant"><span>${i+1}. ${safe(p.name)}</span><small>Participante</small></div>`).join(""):'<p class="muted">Todavía no hay participantes.</p>';
-  $("spin").disabled=people.length<2;
-  $("resetMatch").disabled=!data.match;
-  renderMatch(data.match);
-  if(!isHost)renderPlayerMatch(data.match);
- },e=>showStatus(isHost?"hostStatus":"joinRoomStatus","Error de conexión: "+e.message));
+
+async function createRoom() {
+  $("createRoom").disabled = true;
+  $("hostControls").classList.remove("hidden");
+  showStatus("hostStatus", "Conectando con Firebase...");
+
+  if (!initFirebase("hostStatus")) {
+    $("createRoom").disabled = false;
+    return;
+  }
+
+  try {
+    roomId = makeId();
+    isHost = true;
+
+    const host = ($("hostName").value.trim() || "Organizador").slice(0, 28);
+
+    await db.collection("rooms").doc(roomId).set({
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      host: host,
+      participants: [],
+      match: null,
+      active: true
+    });
+
+    $("roomPill").textContent = "Sala " + roomId;
+
+    const url = new URL(location.href);
+    url.searchParams.set("room", roomId);
+    url.searchParams.delete("host");
+    $("joinUrl").value = url.href;
+
+    $("qr").innerHTML = "";
+
+    if (typeof QRCode !== "undefined") {
+      new QRCode($("qr"), {
+        text: url.href,
+        width: 220,
+        height: 220,
+        colorDark: "#111827",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    } else {
+      $("qr").textContent = "No cargó el generador QR. Comparte el enlace.";
+    }
+
+    showStatus("hostStatus", "Sala " + roomId + " creada. Comparte el QR o el enlace.");
+    listenRoom();
+  } catch (e) {
+    showStatus("hostStatus", "No se pudo crear la sala: " + e.message);
+  } finally {
+    $("createRoom").disabled = false;
+  }
 }
-function renderMatch(match){
- if(!match){$("matchBox").classList.add("hidden");return}
- $("matchBox").classList.remove("hidden");$("fighter1").textContent=match.a.name;$("fighter2").textContent=match.b.name;
- $("matchInfo").textContent="Enfrentamiento seleccionado al azar. "+new Date(match.at||Date.now()).toLocaleString();
-}
-function renderPlayerMatch(match){
- if(!match)return;
- $("playerMatch").classList.remove("hidden");$("playerF1").textContent=match.a.name;$("playerF2").textContent=match.b.name;
-}
-async function joinRoom(){
- if(!initFirebase())return;
- const name=$("playerName").value.trim().slice(0,28);
- if(!name){showStatus("joinRoomStatus","Escribe un nombre o apodo primero.");return}
- try{
-  const ref=db.collection("rooms").doc(roomId), snap=await ref.get();
-  if(!snap.exists||snap.data().active===false){showStatus("joinRoomStatus","Esta sala no existe o está cerrada.");return}
-  const data=snap.data(), people=data.participants||[];
-  if(people.some(p=>p.name.toLowerCase()===name.toLowerCase())){showStatus("joinRoomStatus","Ese nombre ya está en la sala. Prueba otro.");return}
-  playerId=makeId();playerName=name;
-  await ref.update({participants:firebase.firestore.FieldValue.arrayUnion({id:playerId,name})});
-  $("joinForm").classList.add("hidden");$("joinedBox").classList.remove("hidden");$("joinedName").textContent=name;
-  showStatus("joinRoomStatus","Conectado a la sala "+roomId+".");
-  listenRoom();
- }catch(e){showStatus("joinRoomStatus","No se pudo entrar: "+e.message)}
-}
-async function spin(){
- try{
-  const ref=db.collection("rooms").doc(roomId);
-  await db.runTransaction(async tx=>{
-   const snap=await tx.get(ref);if(!snap.exists)throw new Error("Sala no encontrada");
-   const people=snap.data().participants||[];if(people.length<2)throw new Error("Se necesitan al menos 2 participantes");
-   const first=Math.floor(Math.random()*people.length);let second=Math.floor(Math.random()*(people.length-1));if(second>=first)second++;
-   tx.update(ref,{match:{a:{id:people[first].id,name:people[first].name},b:{id:people[second].id,name:people[second].name},at:Date.now()}});
+
+function listenRoom() {
+  if (!db || !roomId) return;
+
+  if (roomUnsub) roomUnsub();
+
+  roomUnsub = db.collection("rooms").doc(roomId).onSnapshot(doc => {
+    if (!doc.exists) {
+      showStatus(isHost ? "hostStatus" : "joinRoomStatus", "La sala ya no existe.");
+      return;
+    }
+
+    const data = doc.data();
+    const people = data.participants || [];
+
+    if (isHost) {
+      $("count").textContent = people.length;
+
+      $("participants").innerHTML = people.length
+        ? people.map((p, i) =>
+            '<div class="participant"><span>' +
+            (i + 1) + ". " + safe(p.name) +
+            '</span><small>Participante</small></div>'
+          ).join("")
+        : '<p class="muted">Todavía no hay participantes.</p>';
+
+      $("spin").disabled = people.length < 2;
+      $("resetMatch").disabled = !data.match;
+      renderMatch(data.match);
+    } else {
+      renderPlayerMatch(data.match);
+    }
+  }, e => {
+    showStatus(isHost ? "hostStatus" : "joinRoomStatus",
+      "Error de conexión: " + e.message);
   });
- }catch(e){showStatus("hostStatus","No se pudo sortear: "+e.message)}
 }
-async function resetMatch(){try{await db.collection("rooms").doc(roomId).update({match:null})}catch(e){showStatus("hostStatus",e.message)}}
-$("createRoom").addEventListener("click",createRoom);$("joinBtn").addEventListener("click",joinRoom);$("spin").addEventListener("click",spin);$("resetMatch").addEventListener("click",resetMatch);
-$("copyLink").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("joinUrl").value);$("copyLink").textContent="¡Copiado!"}catch(e){$("joinUrl").select();document.execCommand("copy");$("copyLink").textContent="¡Copiado!"}});
-if(params.get("room")){
- roomId=params.get("room");$("hostPanel").classList.add("hidden");$("roomPill").textContent="Sala "+roomId;
- $("joinForm").classList.remove("hidden");
- if(initFirebase()){listenRoom();showStatus("joinRoomStatus","Conectando a la sala "+roomId+"…")}
+
+function renderMatch(match) {
+  if (!match) {
+    $("matchBox").classList.add("hidden");
+    return;
+  }
+
+  $("matchBox").classList.remove("hidden");
+  $("fighter1").textContent = match.a.name;
+  $("fighter2").textContent = match.b.name;
+  $("matchInfo").textContent =
+    "Enfrentamiento seleccionado al azar. " +
+    new Date(match.at || Date.now()).toLocaleString();
 }
-</script></body></html>
+
+function renderPlayerMatch(match) {
+  if (!match) {
+    $("playerMatch").classList.add("hidden");
+    return;
+  }
+
+  $("playerMatch").classList.remove("hidden");
+  $("playerF1").textContent = match.a.name;
+  $("playerF2").textContent = match.b.name;
+}
+
+async function joinRoom() {
+  if (!roomId) {
+    showStatus("joinRoomStatus", "Abre el enlace de una sala para poder entrar.");
+    return;
+  }
+
+  if (!initFirebase("joinRoomStatus")) return;
+
+  const name = $("playerName").value.trim().slice(0, 28);
+
+  if (!name) {
+    showStatus("joinRoomStatus", "Escribe un nombre o apodo primero.");
+    return;
+  }
+
+  $("joinBtn").disabled = true;
+
+  try {
+    const ref = db.collection("rooms").doc(roomId);
+    const snap = await ref.get();
+
+    if (!snap.exists || snap.data().active === false) {
+      showStatus("joinRoomStatus", "Esta sala no existe o está cerrada.");
+      return;
+    }
+
+    const people = snap.data().participants || [];
+
+    if (people.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+      showStatus("joinRoomStatus", "Ese nombre ya está en la sala. Prueba otro.");
+      return;
+    }
+
+    playerId = makeId();
+    playerName = name;
+
+    await ref.update({
+      participants: firebase.firestore.FieldValue.arrayUnion({
+        id: playerId,
+        name: playerName
+      })
+    });
+
+    $("joinForm").classList.add("hidden");
+    $("joinedBox").classList.remove("hidden");
+    $("joinedName").textContent = playerName;
+
+    showStatus("joinRoomStatus", "Conectado a la sala " + roomId + ".");
+    listenRoom();
+  } catch (e) {
+    showStatus("joinRoomStatus", "No se pudo entrar: " + e.message);
+  } finally {
+    $("joinBtn").disabled = false;
+  }
+}
+
+async function spin() {
+  if (!db || !roomId) return;
+
+  $("spin").disabled = true;
+
+  try {
+    const ref = db.collection("rooms").doc(roomId);
+
+    await db.runTransaction(async tx => {
+      const snap = await tx.get(ref);
+
+      if (!snap.exists) throw new Error("Sala no encontrada.");
+
+      const people = snap.data().participants || [];
+
+      if (people.length < 2) {
+        throw new Error("Se necesitan al menos 2 participantes.");
+      }
+
+      const first = Math.floor(Math.random() * people.length);
+      let second = Math.floor(Math.random() * (people.length - 1));
+
+      if (second >= first) second++;
+
+      tx.update(ref, {
+        match: {
+          a: { id: people[first].id, name: people[first].name },
+          b: { id: people[second].id, name: people[second].name },
+          at: Date.now()
+        }
+      });
+    });
+  } catch (e) {
+    showStatus("hostStatus", "No se pudo sortear: " + e.message);
+  }
+}
+
+async function resetMatch() {
+  try {
+    await db.collection("rooms").doc(roomId).update({ match: null });
+  } catch (e) {
+    showStatus("hostStatus", "No se pudo limpiar el enfrentamiento: " + e.message);
+  }
+}
+
+$("createRoom").addEventListener("click", createRoom);
+$("joinBtn").addEventListener("click", joinRoom);
+$("spin").addEventListener("click", spin);
+$("resetMatch").addEventListener("click", resetMatch);
+
+$("copyLink").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("joinUrl").value);
+    $("copyLink").textContent = "¡Copiado!";
+  } catch (e) {
+    $("joinUrl").select();
+    document.execCommand("copy");
+    $("copyLink").textContent = "¡Copiado!";
+  }
+});
+
+if (params.get("room")) {
+  roomId = params.get("room");
+  $("hostPanel").classList.add("hidden");
+  $("roomPill").textContent = "Sala " + roomId;
+  $("joinForm").classList.remove("hidden");
+
+  if (initFirebase("joinRoomStatus")) {
+    listenRoom();
+    showStatus("joinRoomStatus", "Conectando a la sala " + roomId + "...");
+  }
+}
+</script></body>
+</html>
