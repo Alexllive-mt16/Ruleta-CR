@@ -83,6 +83,7 @@ function initFirebase(){
 function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function createRoom(){
   alert("El botón sí funciona");
+  alert("Voy a conectar con Firebase");
  if(!initFirebase()){$("hostControls").classList.remove("hidden");return}
  try{
   roomId=makeId(); isHost=true;
